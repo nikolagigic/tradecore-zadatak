@@ -1,0 +1,10 @@
+{% extends 'person/home.html' %}
+{% block title %}Log In{% endblock %}
+{% block content %}
+<form action="log-auth/" method="POST" >
+    {% csrf_token %}
+    <input type="text" placeholder="username" name="username"><br>
+    <input type="password" placeholder="password" name="password"><br>
+    <input type="submit" value="Log In">
+</form>
+{% endblock %}

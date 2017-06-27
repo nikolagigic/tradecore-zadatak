@@ -1,0 +1,38 @@
+{% extends 'person/home.html' %}
+     {% block title %}
+     Register
+     {% endblock %}
+{% block content %}
+{#    <div style="text-align: center;">#}
+{#    <form action="reg-check/" method="post">#}
+{#        {% csrf_token %}#}
+{#    <div style="position: absolute;top: 10%;left: 42%; text-align: right;">#}
+{#        <div ><label>Name: </label><br></div>#}
+{#        <div style="margin-top: 8px;"><label>Surname: </label><br></div>#}
+{#        <div style="margin-top: 8px;"><label>E-mail: </label><br></div>#}
+{#        <div style="margin-top: 8px;"><label>Username: </label><br></div>#}
+{#        <div style="margin-top: 8px;"><label>Password: </label><br></div>#}
+{#    </div>#}
+{#    <div style="position: absolute;top: 10%;right: 38%;">#}
+{#        <input type="text" name="name"><br>#}
+{#        <input style="margin-top: 5px;" type="text" name="surname"><br>#}
+{#        <input style="margin-top: 5px;" type="email" name="email"><br>#}
+{#        <input style="margin-top: 5px;" type="text" name="username"><br>#}
+{#        <input style="margin-top: 5px;" type="password" name="password"><br>#}
+{#        <input style="margin-top: 5px;" type="submit" value="Register">#}
+{#    </div>#}
+{##}
+{#    </form>#}
+{#    </div>#}
+
+    <form method="POST" name="register" onsubmit="return check();" action="reg-check/">
+    {% csrf_token %}
+    <label>Name: </label><input type="text" name="name"><br>
+    <label>Surname: </label><input type="text" name="surname"><br>
+    <label>E-mail: </label><input type="email" name="email"><br>
+    <label>Username: </label><input type="text" name="username"><br>
+    <label>Password: </label><input type="password" name="password"><br>
+    <input type="submit" value="Register">
+    </form>
+
+{% endblock %}

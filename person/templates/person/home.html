@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load staticfiles %}
+    <meta charset="UTF-8">
+    <title>{% block title %}  Home  {% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div >
+{% block content %}
+Hello, this is Home page!<br>
+    Want to go somewhere else? Feel free to choose one of these options:<br>
+    <ul>
+    <li><a href="{% url 'login' %}">Log In</a></li>
+    <li><a href="{% url 'register' %}">Register</a></li>
+    </ul>
+{% endblock %}
+</div>
+</body>
+</html>

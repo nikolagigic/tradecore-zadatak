@@ -1,0 +1,30 @@
+{% extends 'person/home.html' %}
+
+{% block content %}
+
+    <h2>{{ user_info.name }} {{ user_info.surname }}</h2>
+    <div>
+    <label>E-mail: </label>{{ user_info.email }}<br>
+    <h3>Posts:</h3>
+    {% for post in posts %}
+        <h4>{{ post.title }}</h4>
+        <p>
+        {{ post.content }}
+        </p>
+        <label>Likes: {{ post.likes }}</label>
+         <form action="vote-up/" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="+" style="width: 25px; height: 25px; text-align: center;"><label style="font-size: 14px">Vote Up</label>
+        <input type="hidden" name="post_id" value="{{ post.id }}">
+         <input type="hidden" name="referrer" value="{{ request.path }}">
+    </form>
+         <form action="vote-down/" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="+" style="width: 25px; height: 25px; text-align: center;"><label style="font-size: 14px">Vote Down</label>
+        <input type="hidden" name="post_id" value="{{ post.id }}">
+         <input type="hidden" name="referrer" value="{{ request.path }}">
+    </form>
+    {% endfor %}
+    </div>
+
+{% endblock %}
