@@ -1,4 +1,4 @@
-import sys, os, random
+import sys, os, random, jwt
 
 sys.path.append(os.path.join(os.getcwd(),'..')) # Appending cwd
 
@@ -17,7 +17,8 @@ print('''
             
             If You want me to proceed with default variables such as username and password during the users creation process, type 'start'.
             
-            However, if You'd like to change the variables, feel free to do so. To list the variables type 'show'. After You are done with changes, type 'start'
+            However, if You'd like to change the variables, feel free to do so. To list the variables type 'show'. After You are done with changes, type 'start'.
+            If you need anything else, type 'help'
             
             ''')
 
@@ -45,8 +46,8 @@ def start():
     number_of_users=config_defaults[0]
     max_posts_per_user=config_defaults[1]
     max_likes_per_user =config_defaults[2]
+    defaults['password'] = jwt.encode({'password': defaults['password']}, 'tradecore', algorithm='HS256')
 
-    max_likes_switch=0
 
     for i in range(0,number_of_users):
         defaults['name'][0].upper()
@@ -82,7 +83,7 @@ def start():
 
     print('\n')
 
-    # Proces lajkovanja
+    # Liking process
 
     done=False
     while 0 in [post.likes for post in Post.objects.all()]:
@@ -115,12 +116,10 @@ def start():
             user.logged_in=False
             user.save()
             print('[!] other_users: {}'.format(other_users))
-            # other_posts = list(Post.objects.filter(author=other_user))
             other_posts = {}
             for user in other_users:
                 other_posts[user]=list(Post.objects.filter(author=user))
             print('[!] other_posts: {} [!]'.format(other_posts))
-            # if Post.objects.filter(random.choice(other_users)):
             print('[!] Commencing liking process [!]')
             for like in range(max_likes_per_user):
                 rand_post_key=random.choice(list(other_posts.keys()))
@@ -129,18 +128,8 @@ def start():
                 if other_posts[rand_post_key]:
                     rand_post = random.choice(other_posts[rand_post_key])
                     print('[!] rand_post: {}'.format(rand_post))
-                    # for other_user in other_users:
-                    # print('[+] other_posts: ', end='')
-                    # print(other_posts)
-                    # other_posts_values=[value.likes for value in other_posts]
-                    # print('[!] Collecting other_posts from other_user => {} [{}] [!]'.format(other_user,other_posts))
-                    # print('[!] other_posts_values: {}'.format(other_posts_values))
                     try:
                             print('\n\t\t[+] NEW LIKE [+]')
-                            # rand_post=random.choice(other_posts)
-                            # other_posts.remove(rand_post)
-                            # print('[!] other_posts: ',end='')
-                            # print(other_posts)
                             print('[+] Liking {} POST'.format(rand_post))
                             rand_post.likes+=1
                             rand_post.save()
@@ -168,10 +157,29 @@ def start():
         print('- {}: {} LIKES'.format(result, result.likes))
 
 
+def help():
+    for cmd in help:
+        print(cmd)
+
+def exit():
+    print('\n[!] Exiting [!]')
+    sys.exit(1)
+
 cmds={
     'show':show,
-    'start':start
+    'start':start,
+    'exit':exit,
+    'help':help,
 }
+
+help=[
+    '\nshow => Shows the current values for the user attributes',
+    'start => Starts the whole process of user registration/login, post creation/liking and outputing the results.',
+    'set => Sets the value for user attribute (eg. set name Nikola).',
+    'exit => Tyler quits.\n',
+]
+
+import p
 
 while 1:
     cmd=input('>>> ')

@@ -110,6 +110,8 @@ def logout(request):
     except User.DoesNotExist:
         del request.session['id']
         return redirect('/')
+    except KeyError:
+        return redirect('/')
 
 def like(request):
     post_id=request.POST['post_id']
