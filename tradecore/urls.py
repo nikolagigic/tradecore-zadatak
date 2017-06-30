@@ -19,7 +19,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/posts/', include('person.api.urls'), name='post-api'),
+    url(r'^api/rest/', include('person.api.urls'), name='post-api'),
     url(r'^', include('person.urls'), name='home')
-
 ]

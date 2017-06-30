@@ -2,28 +2,17 @@
 
 {% block content %}
 
-<h2>Posts associated with this user:</h2>
+<h2>{{ full_name }}'s Dashboard</h2><br>
+    <h3>Posts:</h3>
 
 {% for post in posts %}
 
     <div>
     <h4>{{ post.title }}</h4>
-    <p>
+    <p style="font-size: 14px;">
         {{ post.content }}
     </p>
-    <label>Likes: {{ post.likes }}</label>
-    <form action="vote-up/" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="+" style="width: 25px; height: 25px; text-align: center;"><label style="font-size: 14px">Vote Up</label>
-        <input type="hidden" name="post_id" value="{{ post.id }}">
-        <input type="hidden" name="referrer" value="{{ request.path }}">
-    </form>
-    <form action="vote-down/" method="POST">
-        {% csrf_token %}
-        <input type="submit" value="-" style="width: 25px; height: 25px; text-align: center;"><label style="font-size: 14px">Vote Down</label>
-        <input type="hidden" name="post_id" value="{{ post.id }}">
-        <input type="hidden" name="referrer" value="{{ request.path }}">
-    </form>
+    <label style="font-size: 12px">Likes: {{ post.likes }}</label>
     </div>
 {% endfor %}
 

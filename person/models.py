@@ -23,3 +23,29 @@ class Post(models.Model):
     def __str__(self):
         self.full_name=self.author.name+' '+self.author.surname+' - '+self.title
         return self.full_name
+
+
+class Like(models.Model):
+
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    post=models.ForeignKey(Post)
+    like=models.BooleanField(default=False)
+
+    liked=models.DateTimeField(auto_now_add=True)
+
+class LookupUserInfo(models.Model):
+
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+
+    givenName=models.CharField(max_length=255, null=True, blank=True, default=None)
+    familyName=models.CharField(max_length=255, null=True, blank=True, default=None)
+    email=models.CharField(max_length=255, null=True, blank=True, default=None)
+    gender=models.CharField(max_length=6, null=True, blank=True, default=None)
+    location=models.CharField(max_length=255, null=True, blank=True, default=None)
+    timeZone=models.CharField(max_length=255, null=True, blank=True, default=None)
+    bio=models.CharField(max_length=255, null=True, blank=True, default=None)
+    site=models.CharField(max_length=255, null=True, blank=True, default=None)
+
+    def __str__(self):
+        self.full_name=self.user.name+' '+self.user.surname+' - Lookup Info'
+        return self.full_name
