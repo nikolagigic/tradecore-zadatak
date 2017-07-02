@@ -179,8 +179,6 @@ help=[
     'exit => Tyler quits.\n',
 ]
 
-import p
-
 while 1:
     cmd=input('>>> ')
     try:
