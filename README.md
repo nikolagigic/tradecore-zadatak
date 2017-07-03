@@ -22,8 +22,8 @@ Nekoliko reci samo:
   Izgled website-a je krajnje prost, bez ikakvog sminkanja.
   
   REST-API URL: domain:port/api/rest/
-  Filteri za REST-API: posts, lookups, username robota
-  Username browsing: domain:port/user/username_robota
+  Filteri za REST-API: posts, lookups, <username> (npr. domain:port/api/rest/posts/; domain:post/api/rest/lookups/; domain:port/api/rest/robottyler1/)
+  Profil robota/korisnika: domain:port/user/<username>
   
   U slucaju da pustate server na WAN/LAN, dodajte samo ip adresu u listu ALLOWED_HOSTS koja se nalazi u tradecore/settings.py
   
