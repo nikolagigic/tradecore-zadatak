@@ -23,6 +23,7 @@ Nekoliko reci samo:
   
   REST-API URL: domain:port/api/rest/
   Filteri za REST-API: posts, lookups, username robota
+  Username browsing: domain:port/user/username_robota
   
   U slucaju da pustate server na WAN/LAN, dodajte samo ip adresu u listu ALLOWED_HOSTS koja se nalazi u tradecore/settings.py
   
