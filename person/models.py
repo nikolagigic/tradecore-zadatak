@@ -1,5 +1,7 @@
 from django.db import models
 
+# This is a test !
+
 class User(models.Model):
 
     name=models.CharField(max_length=255)
@@ -8,6 +10,7 @@ class User(models.Model):
     username=models.CharField(max_length=255)
     password=models.CharField(max_length=2048)
     logged_in=models.BooleanField(default=False)
+    print(logged_in)
 
     def __str__(self):
         self.full_name=self.name+' '+self.surname
